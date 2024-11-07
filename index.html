@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maria's Birthday❤</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        .countdown {
+            font-size: 2em;
+            color: #007BFF;
+            margin-top: 20px;
+        }
+        .countdown span {
+            font-weight: bold;
+        }
+        .total-days {
+            font-size: 1.5em;
+            color: #28a745;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>👀💖الوقت المتبقي علي اكتمال القمر حجي</h1>
+    <div class="countdown" id="countdown"></div>
+    <div class="total-days" id="total-days"></div>
+
+    <script>
+        // تاريخ اليوم الذي سنعتبره تاريخ ميلاد ماريا
+        const birthDate = new Date(); // إذا كان اليوم هو يوم ميلاد ماريا
+
+        // تاريخ 26 يوليو 2025
+        const targetDate = new Date('2025-07-26T00:00:00');
+
+        function updateCountdown() {
+            const currentDate = new Date();
+            const timeDifference = targetDate - currentDate;
+
+            if (timeDifference <= 0) {
+                document.getElementById('countdown').innerHTML = "لقد وصلنا إلى 26 يوليو 2025!";
+                document.getElementById('total-days').innerHTML = "";
+                return;
+            }
+
+            // حساب الشهور، الأيام، الساعات، الدقائق، والثواني
+            const years = Math.floor(timeDifference / (365.25 * 24 * 60 * 60 * 1000));
+            const months = Math.floor((timeDifference % (365.25 * 24 * 60 * 60 * 1000)) / (30 * 24 * 60 * 60 * 1000));
+            const days = Math.floor((timeDifference % (30 * 24 * 60 * 60 * 1000)) / (24 * 60 * 60 * 1000));
+            const hours = Math.floor((timeDifference % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+            const minutes = Math.floor((timeDifference % (60 * 60 * 1000)) / (60 * 1000));
+            const seconds = Math.floor((timeDifference % (60 * 1000)) / 1000);
+
+            // حساب إجمالي الأيام المتبقية
+            const totalDays = Math.floor(timeDifference / (24 * 60 * 60 * 1000));
+
+            // عرض النتيجة
+            document.getElementById('countdown').innerHTML = `
+                <span>${years}</span> سنة، 
+                <span>${months}</span> شهر، 
+                <span>${days}</span> يوم، 
+                <span>${hours}</span> ساعة، 
+                <span>${minutes}</span> دقيقة، 
+                <span>${seconds}</span> ثانية
+            `;
+
+            document.getElementById('total-days').innerHTML = `إجمالي الأيام المتبقية: <span>${totalDays}</span> يوم`;
+        }
+
+        // تحديث العداد كل ثانية
+        setInterval(updateCountdown, 1000);
+    </script>
+
+</body>
+</html>
