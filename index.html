@@ -6,45 +6,64 @@
     <title>Maria's Birthday❤</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f3f3f3;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f0f8;
+            color: #4B0082;
             text-align: center;
             margin-top: 50px;
+            background-image: linear-gradient(to bottom right, #ff7eb9, #ff65a3);
         }
+
         h1 {
-            color: #333;
-        }
-        .countdown {
-            font-size: 2em;
-            color: #007BFF;
-            margin-top: 20px;
-        }
-        .countdown span {
+            font-size: 2.5em;
+            color: #fff;
+            margin-bottom: 20px;
             font-weight: bold;
         }
+
+        .countdown {
+            font-size: 2.2em;
+            color: #fff;
+            margin-top: 20px;
+            font-weight: bold;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .countdown span {
+            color: #ffeb3b;
+            font-size: 1.5em;
+        }
+
         .total-days {
             font-size: 1.5em;
-            color: #28a745;
+            color: #ffeb3b;
             margin-top: 20px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
         }
+
+        .total-days span {
+            font-size: 1.6em;
+            color: #fff;
+            font-weight: bold;
+        }
+
     </style>
 </head>
 <body>
 
-    <h1>👀💖الوقت المتبقي علي اكتمال القمر حجي</h1>
+    <h1>🎉💖 الوقت المتبقي لعيد ميلاد ماريا 👀</h1>
     <div class="countdown" id="countdown"></div>
     <div class="total-days" id="total-days"></div>
 
     <script>
-        // تاريخ اليوم الذي سنعتبره تاريخ ميلاد ماريا
-        const birthDate = new Date(); // إذا كان اليوم هو يوم ميلاد ماريا
-
-        // تاريخ 26 يوليو 2025
-        const targetDate = new Date('2025-07-26T00:00:00');
+        // تحديد تاريخ 26 يوليو 2025 كهدف
+        const targetDate = new Date('2025-07-26T00:00:00+02:00'); // تحديد التوقيت GT+2
 
         function updateCountdown() {
-            const currentDate = new Date();
-            const timeDifference = targetDate - currentDate;
+            // الحصول على التاريخ والوقت الحالي بتوقيت القاهرة
+            const currentDate = new Date().toLocaleString("en-US", { timeZone: "Africa/Cairo" });
+            const currentDateObj = new Date(currentDate);
+            const timeDifference = targetDate - currentDateObj;
 
             if (timeDifference <= 0) {
                 document.getElementById('countdown').innerHTML = "لقد وصلنا إلى 26 يوليو 2025!";
