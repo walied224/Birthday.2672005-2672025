@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maria's Birthday❤</title> <!-- تعديل العنوان هنا -->
+    <title>Maria's Birthday❤</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -11,6 +11,8 @@
             color: #fff; /* النصوص باللون الأبيض */
             text-align: center;
             margin-top: 50px;
+            position: relative;
+            overflow: hidden;
         }
 
         h1 {
@@ -47,6 +49,36 @@
             font-weight: bold;
         }
 
+        /* تأثيرات الاحتفال */
+        .confetti {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            display: none;
+        }
+
+        .confetti div {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ffeb3b;
+            opacity: 0.8;
+            animation: confettiAnimation 2s infinite;
+        }
+
+        @keyframes confettiAnimation {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -54,6 +86,9 @@
     <h1>🎉💖 الوقت المتبقي لعيد ميلاد ماريا 👀</h1>
     <div class="countdown" id="countdown"></div>
     <div class="total-days" id="total-days"></div>
+
+    <!-- شريط الاحتفال -->
+    <div class="confetti" id="confetti"></div>
 
     <script>
         // تحديد تاريخ 26 يوليو 2025 كهدف
@@ -66,8 +101,11 @@
             const timeDifference = targetDate - currentDateObj;
 
             if (timeDifference <= 0) {
-                document.getElementById('countdown').innerHTML = "لقد وصلنا إلى 26 يوليو 2025!";
-                document.getElementById('total-days').innerHTML = "";
+                // عند انتهاء العداد، عرض رسالة واحتفالات
+                document.getElementById('countdown').innerHTML = "🎉🥳 لقد وصلنا إلى 26 يوليو 2025! 🥳🎉";
+                document.getElementById('total-days').innerHTML = "🎂 ماريا أكملت 20 عامًا! 🎂";
+                startConfetti(); // بدء احتفالات الكونفيتي
+
                 return;
             }
 
@@ -93,6 +131,20 @@
             `;
 
             document.getElementById('total-days').innerHTML = `إجمالي الأيام المتبقية: <span>${totalDays}</span> يوم`;
+        }
+
+        // دالة بدء الكونفيتي عند الانتهاء
+        function startConfetti() {
+            const confettiContainer = document.getElementById('confetti');
+            confettiContainer.style.display = 'block';
+            for (let i = 0; i < 100; i++) {
+                let confettiPiece = document.createElement('div');
+                confettiPiece.style.left = `${Math.random() * 100}%`;
+                confettiPiece.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                confettiPiece.style.animationDelay = `${Math.random() * 3}s`;
+                confettiPiece.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                confettiContainer.appendChild(confettiPiece);
+            }
         }
 
         // تحديث العداد كل ثانية
